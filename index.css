@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    margin-top: 0;
+}
+
+p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Styling for personal info section */
+#personal-info {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* Styling for skills section */
+#skills {
+    margin-bottom: 20px;
+}
+
+/* Styling for education, work experience, and personal references sections */
+#education,
+#work-experience,
+#personal-references {
+    margin-bottom: 40px;
+}
+
+/* Additional styling can be added as needed */
