@@ -1,57 +1,73 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Function to fetch data from web service endpoints
-    function fetchData(endpoint, callback) {
-        fetch(endpoint)
-            .then(response => response.json())
-            .then(data => callback(data))
-            .catch(error => console.error('Error fetching data:', error));
-    }
+    fetch('http://localhost:3000')
+        .then(response => response.json())
+        .then(data => {
+            displayPersonalInfo(data.Personal_Information[0]);
+            displayAboutMe(data.About_Me[0]);
+            displaySkills(data.Skills[0]);
+            displayEducation(data.Education[0]);
+            displayWorkExperience(data.Work_Experience[0]);
+            displayPersonalReferences(data.Personal_References[0]);
+        })
+        .catch(error => console.error('Error fetching data:', error));
 
-    // Function to display personal information
-    function displayPersonalInfo(data) {
+    function displayPersonalInfo(personalInfo) {
         const personalInfoDiv = document.getElementById('personal-info');
         personalInfoDiv.innerHTML = `
             <h2>Personal Information</h2>
-            <p>Name: ${data.name}</p>
-            <p>Birth Date: ${data.birthdate}</p>
-            <p>Gender: ${data.gender}</p>
-            <p>Contact No: ${data.contact_no}</p>
-            <p>Address: ${data.address}</p>
+            <p>Name: ${personalInfo.Name}</p>
+            <p>Birthdate: ${personalInfo.Birthdate}</p>
+            <p>Gender: ${personalInfo.Gender}</p>
+            <p>Contact No: ${personalInfo.Contact_No}</p>
+            <p>Address: ${personalInfo.Address}</p>
         `;
     }
 
-    // Function to display skills
-    function displaySkills(data) {
+    function displayAboutMe(aboutMe) {
+        const aboutMeDiv = document.getElementById('about-me');
+        aboutMeDiv.innerHTML = `
+            <h2>About Me</h2>
+            <p>${aboutMe.Description}</p>
+        `;
+    }
+
+    function displaySkills(skills) {
         const skillsDiv = document.getElementById('skills');
-        let skillsHtml = '<h2>Skills</h2>';
-        data.forEach(skill => {
-            skillsHtml += `<p>Description: ${skill.description}, Expertise Level: ${skill.expertise_level}</p>`;
-        });
-        skillsDiv.innerHTML = skillsHtml;
+        const languages = skills.Languages.join(', ');
+        skillsDiv.innerHTML = `
+            <h2>Skills</h2>
+            <p>Languages: ${languages}</p>
+        `;
     }
 
-    // Function to display education
-    function displayEducation(data) {
+    function displayEducation(education) {
         const educationDiv = document.getElementById('education');
-        // Similar logic to display skills
+        educationDiv.innerHTML = `
+            <h2>Education</h2>
+            <p>Degree: ${education.Degree}</p>
+            <p>Institution: ${education.Institution}</p>
+            <p>Year: ${education.Year}</p>
+        `;
     }
 
-    // Function to display work experience
-    function displayWorkExperience(data) {
+    function displayWorkExperience(workExperience) {
         const workExperienceDiv = document.getElementById('work-experience');
-        // Similar logic to display skills
+        workExperienceDiv.innerHTML = `
+            <h2>Work Experience</h2>
+            <p>Company: ${workExperience.Company}</p>
+            <p>Job Title: ${workExperience.Job_Title}</p>
+            <p>Start Date: ${workExperience.Start_Date}</p>
+            <p>End Date: ${workExperience.End_Date}</p>
+        `;
     }
 
-    // Function to display personal references
-    function displayPersonalReferences(data) {
+    function displayPersonalReferences(personalReferences) {
         const personalReferencesDiv = document.getElementById('personal-references');
-        // Similar logic to display skills
+        personalReferencesDiv.innerHTML = `
+            <h2>Personal References</h2>
+            <p>Name: ${personalReferences.Name}</p>
+            <p>Contact No: ${personalReferences.Contact_No}</p>
+            <p>Relationship: ${personalReferences.Relationship}</p>
+        `;
     }
-
-    // Fetch data from web service endpoints and display on the webpage
-    fetchData('/personal_info', displayPersonalInfo);
-    fetchData('/skills', displaySkills);
-    fetchData('/education', displayEducation);
-    fetchData('/work_experience', displayWorkExperience);
-    fetchData('/personal_references', displayPersonalReferences);
 });
