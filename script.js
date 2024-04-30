@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:3000')
+    fetch('https://webserver-1-g5ti.onrender.com/')
         .then(response => response.json())
         .then(data => {
             displayPersonalInfo(data.Personal_Information[0]);
